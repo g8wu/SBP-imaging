@@ -5,12 +5,10 @@ Created on Tue Feb 13 14:52:25 2018
 @author: gwu
 """
 from Tkinter import *
-import numpy as np
-import cv2
-from Tkinter import Tk
 from tkFileDialog import askopenfilename
-import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+import numpy as np
+import cv2, sys
 
 class cellSelect(Frame):
 
