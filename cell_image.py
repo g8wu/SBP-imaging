@@ -34,32 +34,42 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 Tk().withdraw()
 filename = askopenfilename()
 img = cv2.imread(filename)
+clone = img.copy()
 
 #Select ROI window
 #TODO loop to select multiple
 fromCenter = False
 r = cv2.selectROI("Cell Selection", img, fromCenter)
 
+
+        
+
 #Crop image
 #TODO save center coord + length&width
 #TODO select multiple ROI
 #TODO redo selection with control+Z
-top = int(r[1])
-bott = int(r[1]+r[3])
-left = int(r[0])
-right = int(r[0]+r[2])
-height = int(bott-top)
-width = int(right-left)
-centerX = int(r[1] + width/2)
-centerY = int(r[2] + height/2)
+if cv2.waitKey(0):
+    cv2.destroyAllWindows()
 
-imgCrop = img[top:bott,     #height
-              left:right]   #width
+while True:
+    
+    top = int(r[1])
+    bott = int(r[1]+r[3])
+    left = int(r[0])
+    right = int(r[0]+r[2])
+    height = int(bott-top)
+    width = int(right-left)
+    centerX = int(r[1] + width/2)
+    centerY = int(r[2] + height/2)
+    
+    imgCrop = img[top:bott,     #height
+                  left:right]   #width
+    
 
 #Display cropped image window
 #gui display roi img with coords,l&w
 cv2.imshow("Enter descriptors", imgCrop)
-print 'Cell center coord: ', centerX, ', ', centerY, '\n', 'Height x Width: ', height, 'x', width
+print 'Center (x,y): ', centerX, ', ', centerY, '\n', 'Height x Width: ', height, 'x', width
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
