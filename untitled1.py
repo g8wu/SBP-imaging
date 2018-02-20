@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Feb 13 14:52:25 2018
+Created on Tue Feb 20 13:09:23 2018
 
 @author: gwu
 """
-from Tkinter import Tk
-from tkFileDialog import askopenfilename
-from PyQt5 import QtCore, QtGui, QtWidgets
-import numpy as np
-import cv2
 
-class cellSelect:
+from Tkinter import *
+
+class App:
+    def __init__(self, master, img = None):
+        self.master = master
+        self.browseButt()
+        master.geometry("300x200")
     
     def getFile(self):
-        Tk().withdraw()
+        self.withdraw()
         filename = askopenfilename()
         img = cv2.imread(filename)
         
@@ -35,20 +36,17 @@ class cellSelect:
         #gui display roi img with coords,l&w
         cv2.imshow("Enter descriptors", imgCrop)
         print 'Cell center coord: ', centerX, ', ', centerY, '\n', 'Height x Width: ', height, 'x', width
-                
-        
-    def createWidgets(self):
+           
+    def browseButt(self):
         browse = Button(self)
         browse.pack(side= LEFT)
         browse.pack(side = BOTTOM)
         browse["text"] = "Browse",
-        browse["command"] = self.getFile
-        
-    def __init__(self, master = None):
-        self.master = master
-        self.createWidgets()
-        
+        browse["command"] = self.getFile        
+
 
 root = Tk()
-app = cellSelect(root)
-app.mainloop()
+root.option_add('*font', ('verdana', 12, 'bold'))
+root.title("Cell Selection")
+display = App(root)
+root.mainloop()
