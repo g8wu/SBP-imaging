@@ -69,7 +69,7 @@ cv2.imshow("Enter descriptors", imgCrop)
 print 'Center (x,y): (', centerX, ', ', centerY, ')\n'
 print 'Height x Width: ', height, 'x', width, '\n'
 print 'Enter descriptors:'
-print 'diff: differentiated \nundiff: Undifferentiated \ndmg: Damaged'
+print ' 1: Undifferentiated \n 2: differentiated \n 3: Damaged'
 print '>>'
 cv2.waitKey(0)
 cv2.destroyAllWindows()
