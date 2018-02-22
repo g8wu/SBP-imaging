@@ -6,7 +6,7 @@ Created on Wed Feb 21 14:52:09 2018
 """
 
 #TODO WHY IS IT SAYING 'BUTTON' NOT DEFINED??
-from Tkinter import Tk
+from Tkinter import Tk, Button, BOTTOM, RIGHT, IntVar, Checkbutton
 import cv2
 from tkFileDialog import askopenfilename
 
@@ -22,7 +22,7 @@ class TKtest:
         
         #Check buttons
         self.v1 = IntVar()
-        check = Checkbutton(window, text = "Undifferentiated", variable = self.v1, command = self.enterDscrp)
+        check = Checkbutton(self, text = "Undifferentiated", variable = self.v1, command = self.enterDscrp)
         
         #Packing
         check.grid(row = 1, column = 1)

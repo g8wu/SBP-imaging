@@ -26,15 +26,13 @@ import numpy as np
 import cv2
 from Tkinter import Tk
 from tkFileDialog import askopenfilename
-import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 #import image file
 #TODO resize image stuff
-Tk().withdraw()
+Tk().withdraw()     #keeps blank tk window from popping up
 filename = askopenfilename()
 img = cv2.imread(filename)
-clone = img.copy()
 
 #Select ROI window
 #TODO loop to select multiple
@@ -61,7 +59,9 @@ centerY = int(r[2] + height/2)
     
 imgCrop = img[top:bott,     #height
               left:right]   #width
-    
+   
+if cv2.waitKey(0):
+    cv2.destroyAllWindows()
 
 #Display cropped image window
 #gui display roi img with coords,l&w
@@ -69,8 +69,14 @@ cv2.imshow("Enter descriptors", imgCrop)
 print 'Center (x,y): (', centerX, ', ', centerY, ')\n'
 print 'Height x Width: ', height, 'x', width, '\n'
 print 'Enter descriptors:'
-print ' 1: Undifferentiated \n 2: differentiated \n 3: Damaged'
+print ' 1: Undifferentiated \n 2: Differentiated \n 3: Damaged'
 print '>>'
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+import sys, traceback, threading
+thread_names = {t.ident: t.name for t in threading.enumerate()}
+for thread_id, frame in sys._current_frames().iteritems():
+    print("Thread %s:" % thread_names.get(thread_id, thread_id))
+    traceback.print_stack(frame)
+    print()

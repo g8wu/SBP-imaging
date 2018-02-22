@@ -10,19 +10,20 @@ from tkFileDialog import askopenfilename
 
 
 class TKtest():
-    def __init__(self, master = None):
-        window = Tk()
-        browse = Button(window, text = "Browse", command = getFile)
-        browse.pack(side=BOTTOM)
-        browse.pack(side=RIGHT)
-        
-        window.mainloop()
-        
     def getFile():
         Tk().withdraw()
         filename = askopenfilename()
         img = cv2.imread(filename)
         return img
+
+    def __init__(self, master = None):
+        window = Tk()
+        browse = Button(window, text = "Browse", command = self.getFile)
+        browse.pack(side=BOTTOM)
+        browse.pack(side=RIGHT)
+        
+        window.mainloop()
+        
 
 if __name__ == "__main__":
     TKtest()
