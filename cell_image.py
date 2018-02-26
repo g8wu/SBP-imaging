@@ -37,7 +37,7 @@ img = cv2.imread(filename)
 #Select ROI window
 #TODO loop to select multiple
 fromCenter = False
-r = cv2.selectROI("Cell Selection", img, fromCenter)
+cv2.selectROI("Cell Selection", img, fromCenter)
 
 #Crop image
 #TODO save center coord + length&width
@@ -60,8 +60,6 @@ centerY = int(r[2] + height/2)
 imgCrop = img[top:bott,     #height
               left:right]   #width
    
-if cv2.waitKey(0):
-    cv2.destroyAllWindows()
 
 #Display cropped image window
 #gui display roi img with coords,l&w
