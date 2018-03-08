@@ -43,7 +43,7 @@ class cellChars(cellNum, descr):
                 ws['A'+ row] = descr
                 curr = 'A' +row
             return
-        for col in range(,):
+        for col in range(1,2):
             if ws[col + ]
     
 
