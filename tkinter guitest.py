@@ -8,33 +8,56 @@ from Tkinter import *
 import cv2
 from tkFileDialog import askopenfilename
 
-
 class TKtest():
-    
+        
     def __init__(self):
         window = Tk()
         window.title("Cell Selection")
         
-        # Frame1: ROI Select, Browse Button
         frame1 = Frame(window)
-        frame1.pack(side = LEFT)
-        self.v1 = IntVar()
-        self.canvas = Canvas(window, width = 200, height = 100, variable = self.v1, bg = "white")
+        label1 = Label(frame1, text = "Click center of cell and drag to select.\n Press ENTER to begin selecting descriptors.")
+        label1.pack(side = TOP)
         
-        self.v2 = IntVar()
-        browse = Button(window, variale = self.v2, text = "Browse", command = self.getFile)
-        browse.pack(side=BOTTOM)
-        browse.pack(side=RIGHT)
+        canvas = Canvas(window, width = 200, height = 100, bg = "white")
+        canvas.pack(fill=Y)
         
+        browse = Button(window, text = "Browse", command = self.getFile)
+        browse.pack(side=LEFT)
+        """
+        label1 = Label(window, text = "Click center of cell and drag to select.\n Press ENTER to begin selecting descriptors.")
+        label1.pack(side = TOP)
         
+        canvas = Canvas(window, width = 200, height = 100, bg = "white")
+        canvas.pack(fill=Y)
+        
+        browse = Button(window, text = "Browse", command = self.getFile)
+        browse.pack(side=LEFT)
+        """        
         window.mainloop()
-        
+       
     def getFile(self):
         Tk().withdraw()
         filename = askopenfilename()
         img = cv2.imread(filename)
-    
-    
-    
-if __name__ == "__main__":
-    TKtest()
+        
+    def ROI(self):
+        Tk().withdraw()
+        filename = askopenfilename()
+        img = cv2.imread(filename)
+        cv2.selectROI(img)
+
+        imCrop = im[int(r[1]):int(r[1]+r[3]), int(r[0]):int(r[0]+r[2])]
+        #Display cropped image window
+        #gui display roi img with coords,l&w
+        cv2.imshow("Enter descriptors", imgCrop)
+        print 'Center (x,y): (', centerX, ', ', centerY, ')\n'
+        print 'Height x Width: ', height, 'x', width, '\n'
+        print 'Enter descriptors:'
+        print ' 1: Undifferentiated \n 2: Differentiated \n 3: Damaged'
+        print '>>'
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        
+ 
+
+TKtest()
