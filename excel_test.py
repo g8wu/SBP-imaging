@@ -3,22 +3,37 @@
 Created on Fri Feb 09 14:59:48 2018
 
 @author: gwu
+
+Append to col 52 of Podocytes_2_12.xlsx
 """
 from openpyxl import Workbook
-wb = Workbook()
+from openpyxl import load_workbook
+from openpyxl.compat import range
+from Tkinter import Tk
+from tkFileDialog import askopenfilename
 
-# grab the active worksheet
-ws = wb.active
 
-# Data can be assigned directly to cells
-ws['A1'] = 42
-
-# Rows can also be appended
-ws.append([1, 2, 3])
-
-# Python types will automatically be converted
-import datetime
-ws['A2'] = datetime.datetime.now()
-
-# Save the file
-wb.save("sample.xlsx")
+if __name__ == '__main__':
+    
+    Tk().withdraw()     #keeps blank tk window from popping up
+    filename = askopenfilename()
+    #wb = load_workbook(filename = filename)
+    
+    try:
+        wb = load_workbook(filename = filename)
+    except: # catch *all* exceptions
+        print "Not an Excel (.xlsm) file.\n  Supported formats: Supported formats are: .xlsx,.xlsm,.xltx,.xltm"
+        break
+    
+    #TODO add tags column
+    
+    #TODO read ROI location
+        # Data can be assigned directly to cells
+        #ws['A1'] = 42
+        
+        # Rows can also be appended
+        #ws.append([1, 2, 3])
+        
+        # Save the file
+        #wb.save("sample.xlsx")
+    
