@@ -17,13 +17,12 @@ if __name__ == '__main__':
     
     Tk().withdraw()     #keeps blank tk window from popping up
     filename = askopenfilename()
-    #wb = load_workbook(filename = filename)
+    wb = load_workbook(filename = filename)
+    sheet = wb.active
     
-    try:
-        wb = load_workbook(filename = filename)
-    except: # catch *all* exceptions
-        print "Not an Excel (.xlsm) file.\n  Supported formats: Supported formats are: .xlsx,.xlsm,.xltx,.xltm"
-        break
+    boundBox = sheet['P']
+    
+    
     
     #TODO add tags column
     
@@ -36,4 +35,4 @@ if __name__ == '__main__':
         
         # Save the file
         #wb.save("sample.xlsx")
-    
+
